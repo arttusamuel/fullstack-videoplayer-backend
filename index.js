@@ -1,50 +1,25 @@
-
-const PORT = 3001
+const PORT = 4000
 const http = require('http')
 const express = require('express')
-//new additions to try to scrape web info
+const cheerioScraper = require('./cheerioScraper')
+const url = require('./cheerioScraper')
 const axios = require('axios')
-const cheerio = require('cheerio')
+
+//new additions to try to scrape web info
 const app = express()
 
 //Running the server on port 3001
 app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)
 console.log("Page updated..")})
 
-//new data scrape function for ILTALEHTI *** TOIMII *** 
-const url = 'https://www.iltalehti.fi'
-const scrapeWeb = async (page) => {
-    try {
-    const response = await axios.get(page)
-    const html = response.data
-    const $ = cheerio.load(html)
-    const news = []
-
-    $('.full-article', html).each(function(){
-        const page = (url)+$(this).find('a').attr('href')
-        const title = $(this).find('.front-title').text()
-        const time = $(this).find('.category-time').find('time').text()
-        
-        news.push({
-            'title': title,
-            'url': page,
-            'time': time
-        })
-    })
-    return news
-    }catch (err){
-        console.log(err)
-    }     
-}
-
-
-//Root heading
+// *** ROUTES *** //  ROUTES Could be a component on its own
 app.get('/', (req, res) => {
-    res.send('<h1> This is the root of the web application backend</h1>')
+    res.send('<h1> Web Scraper </h1>')
 })
+
 //setting up data to api/newsdata ** TOIMII NYT **
 app.get('/api/newsdata', async (req, res) => {
-    const data = await scrapeWeb(url)
+    const data = await cheerioScraper.cheeriodata
     console.log('app.get api/newsdata käsiteltiin')
     res.json(data)
 })
