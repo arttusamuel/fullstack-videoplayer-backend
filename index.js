@@ -40,8 +40,12 @@ const scrapeWeb = async (page) => {
     }     
 }
 
-scrapeWeb(url).then(news => console.log(news))
+const data = await scrapeWeb(url)
+console.log(data)
+
+
 console.log('Website data should be here: ')
+
 
 
 //videodata example
