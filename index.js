@@ -1,16 +1,18 @@
-
-const PORT = 3001
+const PORT = 4000
 const http = require('http')
 const express = require('express')
-//new additions to try to scrape web info
+const cheerioScraper = require('./cheerioScraper')
+const url = require('./cheerioScraper')
 const axios = require('axios')
-const cheerio = require('cheerio')
+
+//new additions to try to scrape web info
 const app = express()
 
 //Running the server on port 3001
 app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)
 console.log("Page updated..")})
 
+<<<<<<< HEAD
 //new data scraped from YOUTUBE
 //Only logs into console --> need an async await arrow function to be stored 
 
@@ -70,13 +72,18 @@ let videodata = [
     }
   ]
 //Root heading
+=======
+// *** ROUTES *** //  ROUTES Could be a component on its own
+>>>>>>> 3576a89c6b78bf0640be3fd2e0a5cbcdbf9efd77
 app.get('/', (req, res) => {
-    res.send('<h1> This is the root of the web application backend</h1>')
+    res.send('<h1> Web Scraper </h1>')
 })
-//setting up data api content
-app.get('/api/videodata', (req, res) => {
-    res.json(videodata)
-    console.log(videodata)
+
+//setting up data to api/newsdata ** TOIMII NYT **
+app.get('/api/newsdata', async (req, res) => {
+    const data = await cheerioScraper.cheeriodata
+    console.log('app.get api/newsdata käsiteltiin')
+    res.json(data)
 })
 //example of another data api content
 app.get('/api/else', (req, res) => {
