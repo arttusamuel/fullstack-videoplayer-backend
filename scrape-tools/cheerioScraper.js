@@ -3,6 +3,10 @@ const axios = require('axios')
 
 // Cheerio scraper for a 'static' web page or HTML // Could be a component of its own
 
+// Dev ideas 
+// 1. works with different url -> needs a small algorythm 
+// 2. takes url from client side input (frontend)
+
 const url = 'https://www.iltalehti.fi'
 const cheerioScraper = async (page) => {
     try {
@@ -27,6 +31,8 @@ const cheerioScraper = async (page) => {
         console.log(err)
     }     
 }
+
+// executes function in component and exports results in a constant 
 const cheeriodata = cheerioScraper(url)
 
 module.exports = {cheeriodata}

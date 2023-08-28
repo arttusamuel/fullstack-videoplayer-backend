@@ -1,9 +1,10 @@
 const PORT = 4000
 const http = require('http')
 const express = require('express')
-const cheerioScraper = require('./cheerioScraper')
-const url = require('./cheerioScraper')
+const cheerioScraper = require('./scrape-tools/cheerioScraper')
+const url = require('./scrape-tools/cheerioScraper')
 const axios = require('axios')
+const puppetScraper = require('./scrape-tools/puppetScraper')
 
 //new additions to try to scrape web info
 const app = express()
@@ -12,6 +13,7 @@ const app = express()
 app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)
 console.log("Page updated..")})
 
+puppetScraper.puppet("https://youtube.com/@Ard3z/videos")
 //videodata example
 let videodata = [
     {
@@ -37,7 +39,6 @@ let videodata = [
 app.get('/', (req, res) => {
     res.send('<h1> Web Scraper </h1>')
 })
-
 //setting up data to api/newsdata ** TOIMII NYT **
 app.get('/api/newsdata', async (req, res) => {
     const data = await cheerioScraper.cheeriodata
