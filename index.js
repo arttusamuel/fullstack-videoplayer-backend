@@ -12,44 +12,6 @@ const app = express()
 app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)
 console.log("Page updated..")})
 
-<<<<<<< HEAD
-//new data scraped from YOUTUBE
-//Only logs into console --> need an async await arrow function to be stored 
-
-const url = 'https://www.iltalehti.fi/'
-
-const scrapeWeb = async (page) => {
-    try {
-    const response = await axios.get(page)
-    const html = response.data
-    const $ = cheerio.load(html)
-    const news = []
-
-    $('.full-article', html).each(function(){
-        const url = $(this).find('a').attr('href')
-        const title = $(this).find('.front-title').text()
-        const time = $(this).find('.category-time').find('time').text()
-        
-        news.push([
-            title,
-            url,
-            time
-        ])
-    })
-    return news
-    }catch (err){
-        console.log(err)
-    }     
-}
-
-const data = await scrapeWeb(url)
-console.log(data)
-
-
-console.log('Website data should be here: ')
-
-
-
 //videodata example
 let videodata = [
     {
@@ -72,9 +34,6 @@ let videodata = [
     }
   ]
 //Root heading
-=======
-// *** ROUTES *** //  ROUTES Could be a component on its own
->>>>>>> 3576a89c6b78bf0640be3fd2e0a5cbcdbf9efd77
 app.get('/', (req, res) => {
     res.send('<h1> Web Scraper </h1>')
 })
